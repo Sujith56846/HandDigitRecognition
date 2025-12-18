@@ -166,6 +166,27 @@ pip install torch torchvision
 - **Inference Speed**: Real-time (<50ms per prediction)
 - **Accuracy**: 95-99% on well-drawn digits
 
+## 📄 License
+
+This project is open source. Feel free to use, modify, and distribute.
+
+## 👨‍💻 Author
+
+**Sujith G**
+* 💼 LinkedIn: https://linkedin.com/in/sujith-g-347664278/
+* 📧 Email: sujithg2515@gmail.com
+* 🐙 GitHub: https://github.com/Sujith56846
+
+## 📞 Support
+
+Need help? Here are your options:
+
+1. 📖 **Documentation**: Check [DEPLOYMENT.md](DEPLOYMENT.md)
+2. 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Sujith56846)
+3. 📧 **Email**: sujithg2515@gmail.com
+
+🍴 **Fork** to create your own version
+
 ## 🤝 Contributing
 
 1. Fork the project
@@ -174,11 +195,8 @@ pip install torch torchvision
 4. Test thoroughly
 5. Submit a pull request
 
-## 📄 License
-
-This project is open source. Feel free to use, modify, and distribute.
-
 ---
 
 
 **Enjoy drawing and recognizing digits! 🎨🔢**
+
