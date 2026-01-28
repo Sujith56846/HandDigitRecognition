@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Digit Recognition - AI Powered</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="main-title">
+                <i class="fas fa-brain"></i>
+                Hand Digit Recognition
+            </h1>
+            <p class="subtitle">AI-Powered Digit Recognition using {{ model_type if model_type else 'Neural Network' }}</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Drawing Canvas Section -->
+            <div class="canvas-section">
+                <div class="canvas-header">
+                    <h2><i class="fas fa-paint-brush"></i> Draw a Digit (0-9)</h2>
+                    <p>Use your mouse or finger to draw a digit on the canvas below</p>
+                </div>
+                
+                <div class="canvas-container">
+                    <canvas id="drawingCanvas" width="280" height="280"></canvas>
+                    <div class="canvas-overlay" id="canvasOverlay">
+                        <i class="fas fa-pencil-alt"></i>
+                        <p>Start Drawing!</p>
+                    </div>
+                </div>
+
+                <div class="canvas-controls">
+                    <button id="clearBtn" class="btn btn-clear">
+                        <i class="fas fa-trash"></i>
+                        Clear Canvas
+                    </button>
+                    <button id="predictBtn" class="btn btn-predict">
+                        <i class="fas fa-magic"></i>
+                        Predict Digit
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section">
+                <div class="prediction-card" id="predictionCard">
+                    <div class="prediction-header">
+                        <i class="fas fa-robot"></i>
+                        <h3>AI Prediction</h3>
+                    </div>
+                    
+                    <div class="prediction-content" id="predictionContent">
+                        <div class="prediction-placeholder">
+                            <i class="fas fa-draw-polygon"></i>
+                            <p>Draw a digit to see the AI prediction</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model Info -->
+                <div class="model-info">
+                    <h4><i class="fas fa-microchip"></i> Model Information</h4>
+                    <div class="model-details">
+                        <div class="model-detail">
+                            <span class="label">Model Type:</span>
+                            <span class="value">{{ model_type if model_type else 'Loading...' }}</span>
+                        </div>
+                        <div class="model-detail">
+                            <span class="label">Input Size:</span>
+                            <span class="value">28x28 pixels</span>
+                        </div>
+                        <div class="model-detail">
+                            <span class="label">Classes:</span>
+                            <span class="value">10 digits (0-9)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Instructions -->
+        <section class="instructions">
+            <h3><i class="fas fa-info-circle"></i> How to Use</h3>
+            <div class="instruction-grid">
+                <div class="instruction-item">
+                    <div class="instruction-icon">
+                        <i class="fas fa-mouse-pointer"></i>
+                    </div>
+                    <div class="instruction-text">
+                        <h4>1. Draw</h4>
+                        <p>Use your mouse or finger to draw a digit (0-9) on the canvas</p>
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <div class="instruction-text">
+                        <h4>2. Predict</h4>
+                        <p>Click "Predict Digit" or the AI will auto-predict as you draw</p>
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="instruction-text">
+                        <h4>3. Results</h4>
+                        <p>See the predicted digit and confidence score from the AI model</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Hand Digit Recognition | Powered by PyTorch & Flask</p>
+            <div class="tech-stack">
+                <span class="tech-item"><i class="fab fa-python"></i> Python</span>
+                <span class="tech-item"><i class="fas fa-brain"></i> PyTorch</span>
+                <span class="tech-item"><i class="fas fa-flask"></i> Flask</span>
+                <span class="tech-item"><i class="fab fa-js"></i> JavaScript</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner">
+            <i class="fas fa-cog fa-spin"></i>
+            <p>Processing...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

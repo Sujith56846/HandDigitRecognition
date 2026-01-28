@@ -1,0 +1,16 @@
+# Exclude from Vercel deployment
+myenv/
+venv/
+__pycache__/
+*.pyc
+.git/
+.vscode/
+.idea/
+build/
+dist/
+data/
+MNIST/
+
+# Build artifacts
+*.spec
+build/
