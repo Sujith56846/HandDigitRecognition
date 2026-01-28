@@ -119,11 +119,17 @@ def load_model_once():
 
 # Load the model when the module is imported (for Gunicorn/WSGI servers)
 print("🔧 Initializing Hand Digit Recognition App...")
-if not load_model_once():
-    print("⚠️ WARNING: No model loaded! The app will not work properly.")
-    print("⚠️ Make sure model files are in the same directory as app_flask.py")
-else:
-    print(f"✅ Successfully loaded {model_type} model")
+try:
+    if not load_model_once():
+        print("⚠️ WARNING: No model loaded! The app will not work properly.")
+        print("⚠️ Make sure model files are in the same directory as app_flask.py")
+    else:
+        print(f"✅ Successfully loaded {model_type} model")
+except Exception as e:
+    print(f"❌ CRITICAL ERROR loading model: {e}")
+    import traceback
+    traceback.print_exc()
+    # Continue anyway so the app starts (will show error page to users)
 
 
 def process_canvas_image(image_data):
@@ -180,6 +186,12 @@ def predict_digit(image_tensor):
 @app.route('/')
 def index():
     """Serve the main page"""
+    if model is None:
+        return f"""
+        <h1>Model Loading Error</h1>
+        <p>The CNN model failed to load. Model Type: {model_type}</p>
+        <p>Please check the server logs for details.</p>
+        """, 500
     return render_template('index.html', model_type=model_type)
 
 
@@ -187,6 +199,13 @@ def index():
 def predict():
     """Handle prediction requests"""
     try:
+        # Check if model is loaded
+        if model is None:
+            return jsonify({
+                'error': 'Model not loaded',
+                'message': 'The CNN model failed to load. Please check server logs.'
+            }), 500
+        
         data = request.get_json()
         
         if not data or 'image' not in data:
