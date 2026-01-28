@@ -88,8 +88,22 @@ def load_model():
     """Load the pre-trained model (CNN preferred, ANN as fallback)"""
     global model, model_type
     
-    cnn_model_path = 'digit_recognition_cnn_model.pth'
-    ann_model_path = 'digit_recognition_ann_model.pth'
+    # Get the directory where this script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    cnn_model_path = os.path.join(script_dir, 'digit_recognition_cnn_model.pth')
+    ann_model_path = os.path.join(script_dir, 'digit_recognition_ann_model.pth')
+    
+    # Debug logging for Render deployment
+    print(f"Script directory: {script_dir}")
+    print(f"Current working directory: {os.getcwd()}")
+    print(f"Looking for CNN model at: {cnn_model_path}")
+    print(f"Looking for ANN model at: {ann_model_path}")
+    print(f"CNN model exists: {os.path.exists(cnn_model_path)}")
+    print(f"ANN model exists: {os.path.exists(ann_model_path)}")
+    try:
+        print(f"Files in script directory: {os.listdir(script_dir)[:20]}")  # First 20 files
+    except Exception as e:
+        print(f"Error listing directory: {e}")
     
     # Try to load CNN model first (best performance)
     if os.path.exists(cnn_model_path):
