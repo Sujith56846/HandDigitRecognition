@@ -85,34 +85,34 @@ model_type = None
 
 
 def load_model_once():
-    """Load the pre-trained CNN model"""
+    """Load the pre-trained ANN model"""
     global model, model_type
     
     # Get the directory where this script is located
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    cnn_model_path = os.path.join(script_dir, 'digit_recognition_cnn_model.pth')
+    ann_model_path = os.path.join(script_dir, 'digit_recognition_ann_model.pth')
     
     # Debug logging for Render deployment
     print(f"Script directory: {script_dir}")
     print(f"Current working directory: {os.getcwd()}")
-    print(f"Looking for CNN model at: {cnn_model_path}")
-    print(f"CNN model exists: {os.path.exists(cnn_model_path)}")
+    print(f"Looking for ANN model at: {ann_model_path}")
+    print(f"ANN model exists: {os.path.exists(ann_model_path)}")
     try:
         print(f"Files in script directory: {os.listdir(script_dir)[:20]}")  # First 20 files
     except Exception as e:
         print(f"Error listing directory: {e}")
     
-    # Load CNN model
-    if os.path.exists(cnn_model_path):
-        model = CNN()
-        model.load_state_dict(torch.load(cnn_model_path, map_location='cpu'))
+    # Load ANN model
+    if os.path.exists(ann_model_path):
+        model = ANN()
+        model.load_state_dict(torch.load(ann_model_path, map_location='cpu'))
         model.eval()
-        model_type = "CNN"
-        print(f"✅ CNN Model loaded successfully from {cnn_model_path}")
+        model_type = "ANN"
+        print(f"✅ ANN Model loaded successfully from {ann_model_path}")
         return True
     else:
-        print("❌ CNN model not found!")
-        print(f"Please ensure 'digit_recognition_cnn_model.pth' exists in {script_dir}")
+        print("❌ ANN model not found!")
+        print(f"Please ensure 'digit_recognition_ann_model.pth' exists in {script_dir}")
         return False
 
 
